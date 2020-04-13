@@ -1,10 +1,6 @@
 package main
 
-import (
-	"github.com/gin-gonic/gin"
-)
-
 func main() {
-	r := gin.Default()
-	panic(r.Run(":80"))
+	di := DI{}
+	panic(di.Router().Run(":80"))
 }
