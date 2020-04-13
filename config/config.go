@@ -17,5 +17,5 @@ func FromEnv() (Config, error) {
 	}
 	return Config{
 		Faces: faces,
-	}
+	}, nil
 }
