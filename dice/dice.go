@@ -1,26 +1,35 @@
 package dice
 
-import "math/rand"
+import (
+	"math/rand"
+	"sync/atomic"
+)
 
 type Dice struct {
-	faces []string
+	faces *atomic.Value
 }
 
 func New(faces []string) Dice {
+	fs := &atomic.Value{}
+	fs.Store(faces)
 	return Dice{
-		faces: faces,
+		faces: fs,
 	}
 }
 
-func (d Dice) Roll() []string {
-	var faces []string
-	faces = append(faces, d.faces...)
-	rand.Shuffle(len(faces), func(i, j int) {
-		faces[i], faces[j] = faces[j], faces[i]
-	})
+func (d Dice) Ref() []string {
+	fs := append([]string{}, d.faces.Load().([]string)...)
 	end := 6
-	if end > len(faces) {
-		end = len(faces)
+	if end > len(fs) {
+		end = len(fs)
 	}
-	return faces[:end]
+	return fs[:end]
+}
+
+func (d Dice) Roll() {
+	fs := append([]string{}, d.faces.Load().([]string)...)
+	rand.Shuffle(len(fs), func(i, j int) {
+		fs[i], fs[j] = fs[j], fs[i]
+	})
+	d.faces.Store(fs)
 }

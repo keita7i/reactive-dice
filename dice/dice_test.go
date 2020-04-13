@@ -1,24 +1,25 @@
 package dice_test
 
 import (
+	"reflect"
 	"testing"
 
 	"github.com/keitam913/reactive-dice/dice"
 )
 
-func TestRollHasValidLen(t *testing.T) {
+func TestRef(t *testing.T) {
 	cs := []struct {
-		faces   []string
-		wantLen int
+		faces []string
+		want  []string
 	}{
-		{faces: []string{"a", "b", "c", "d", "e"}, wantLen: 5},
-		{faces: []string{"a", "b", "c", "d", "e", "f"}, wantLen: 6},
-		{faces: []string{"a", "b", "c", "d", "e", "f", "g"}, wantLen: 6},
+		{faces: []string{"a", "b", "c", "d", "e"}, want: []string{"a", "b", "c", "d", "e"}},
+		{faces: []string{"a", "b", "c", "d", "e", "f"}, want: []string{"a", "b", "c", "d", "e", "f"}},
+		{faces: []string{"a", "b", "c", "d", "e", "f", "g"}, want: []string{"a", "b", "c", "d", "e", "f"}},
 	}
 	for _, c := range cs {
-		gotLen := len(dice.New(c.faces).Roll())
-		if gotLen != c.wantLen {
-			t.Errorf("len(dice.New(%v).Roll()) = %v; want %v", c.faces, gotLen, c.wantLen)
+		got := dice.New(c.faces).Ref()
+		if !reflect.DeepEqual(got, c.want) {
+			t.Errorf("len(dice.New(%v).Ref()) = %v; want %v", c.faces, got, c.want)
 		}
 	}
 }
