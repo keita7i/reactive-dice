@@ -1,4 +1,12 @@
-FROM golang:1.14 AS builder
+FROM node:12 as node-builder
+
+WORKDIR /build
+
+COPY ./react /build
+
+RUN npm install . && npm run build
+
+FROM golang:1.14 AS golang-builder
 
 WORKDIR /build
 
@@ -10,9 +18,9 @@ FROM scratch
 
 WORKDIR /bin
 
-COPY --from=builder /etc/ssl/certs /etc/ssl/certs
-COPY --from=builder /build/reactive-dice /bin/reactive-dice
-COPY ./assets /usr/share/reactive-dice/assets
+COPY --from=node-builder /build/build /usr/share/reactive-dice/assets
+COPY --from=golang-builder /etc/ssl/certs /etc/ssl/certs
+COPY --from=golang-builder /build/reactive-dice /bin/reactive-dice
 
 EXPOSE 80
 
