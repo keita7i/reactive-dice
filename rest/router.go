@@ -6,6 +6,7 @@ func NewRouter(dh *DiceHandler) *gin.Engine {
 	r := gin.Default()
 
 	r.GET("/v1/dice", dh.Get)
+	r.POST("/v1/dice", dh.Post)
 
 	r.Static("/static", "/usr/share/reactive-dice/assets/static")
 	r.NoRoute(func(ctx *gin.Context) {

@@ -14,3 +14,8 @@ type DiceHandler struct {
 func (h DiceHandler) Get(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, h.Dice.Ref())
 }
+
+func (h DiceHandler) Post(ctx *gin.Context) {
+	h.Dice.Roll()
+	ctx.Status(http.StatusNoContent)
+}
