@@ -7,12 +7,10 @@ services:
     - ./:/app
     - ./cache/mod:/go/pkg/mod
     - ./cache/go-build:/root/.cache/go-build
-    - ./assets:/usr/share/accware/assets
+    - ./react/build:/usr/share/reactive-dice/assets
     working_dir: /app
     ports:
-    - "8080:8080"
+    - "8080:80"
     command: [go, run, .]
-    environment:
-      PORT: "8080"
     env_file:
     - dev.env
