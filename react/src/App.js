@@ -4,14 +4,33 @@ function App() {
         let [face, setFace] = useState('');
 
         useEffect(() => {
-                fetch('/v1/dice')
-                        .then((res) => {
-                                return res.json();
-                        })
-                        .then((faces) => {
-                                setFace(faces[0]);
-                        });
+                refDice().then((faces) => {
+                        setFace(faces[0]);
+                });
         }, []);
+
+        function refDice() {
+                return fetch('/v1/dice').then((res) => {
+                        return res.json();
+                });
+        }
+
+        function rollDice() {
+                fetch('/v1/dice', { method: 'POST' }).then((res) => {
+                        if (res.status === 204) {
+                                refDice().then((faces) => {
+                                        let i = faces.length;
+                                        let roller = setInterval(() => {
+                                                i--;
+                                                setFace(faces[i]);
+                                                if (i <= 0) {
+                                                        clearInterval(roller);
+                                                }
+                                        }, 50);
+                                });
+                        }
+                });
+        }
 
         return (
                 <div className="app">
@@ -27,8 +46,11 @@ function App() {
                                 }
 
                                 .face {
-                                        margin: 3ex 0;
-                                        font-size: 34pt;
+                                        width: 8em;
+                                        line-height: 8em;
+                                        margin: 3ex auto;
+                                        border: solid 1pt #000;
+                                        font-size: 21pt;
                                 }
 
                                 .roll-button {
@@ -47,7 +69,7 @@ function App() {
                         <p className="face">
                                 {face}
                         </p>
-                        <button className="roll-button">Roll</button>
+                        <button className="roll-button" onClick={rollDice}>Roll</button>
                 </div>
         );
 }
