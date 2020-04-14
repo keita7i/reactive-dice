@@ -1,11 +1,9 @@
 import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Reactive Dice</h1>
-    </div>
-  );
+        return (
+                <h1>Reactive Dice</h1>
+        );
 }
 
 export default App;
