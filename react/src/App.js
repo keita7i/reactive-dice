@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 function App() {
+        let [face, setFace] = useState('');
+
+        useEffect(() => {
+                fetch('/v1/dice')
+                        .then((res) => {
+                                return res.json();
+                        })
+                        .then((faces) => {
+                                setFace(faces[0]);
+                        });
+        }, []);
+
         return (
                 <div className="app">
                         <style jsx>{`
@@ -33,7 +45,7 @@ function App() {
                         `}</style>
                         <h1>Reactive Dice</h1>
                         <p className="face">
-                                Face
+                                {face}
                         </p>
                         <button className="roll-button">Roll</button>
                 </div>
