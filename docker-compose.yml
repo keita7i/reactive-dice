@@ -7,7 +7,7 @@ services:
     - ./:/app
     - ./cache/mod:/go/pkg/mod
     - ./cache/go-build:/root/.cache/go-build
-    - ./react/build:/usr/share/reactive-dice/assets
+    - ./react/dist:/usr/share/reactive-dice/assets
     working_dir: /app
     ports:
     - "8080:80"
