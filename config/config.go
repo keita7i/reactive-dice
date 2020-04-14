@@ -7,15 +7,17 @@ import (
 )
 
 type Config struct {
-	Faces []string
+	DiceName string
+	Faces    []string
 }
 
 func FromEnv() (Config, error) {
 	var faces []string
-	if err := json.NewDecoder(strings.NewReader(os.Getenv("FACES"))).Decode(&faces); err != nil{
+	if err := json.NewDecoder(strings.NewReader(os.Getenv("FACES"))).Decode(&faces); err != nil {
 		return Config{}, err
 	}
 	return Config{
-		Faces: faces,
+		DiceName: os.Getenv("DICE_NAME"),
+		Faces:    faces,
 	}, nil
 }

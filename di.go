@@ -21,7 +21,7 @@ func (di DI) DiceHandler() *rest.DiceHandler {
 }
 
 func (di DI) Dice() dice.Dice {
-	return dice.New(di.Config().Faces)
+	return dice.New(di.Config().DiceName, di.Config().Faces)
 }
 
 func (DI) Config() config.Config {

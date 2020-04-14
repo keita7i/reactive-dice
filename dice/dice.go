@@ -6,15 +6,21 @@ import (
 )
 
 type Dice struct {
+	name  string
 	faces *atomic.Value
 }
 
-func New(faces []string) Dice {
+func New(name string, faces []string) Dice {
 	fs := &atomic.Value{}
 	fs.Store(faces)
 	return Dice{
+		name:  name,
 		faces: fs,
 	}
+}
+
+func (d Dice) Name() string {
+	return d.name
 }
 
 func (d Dice) Ref() []string {

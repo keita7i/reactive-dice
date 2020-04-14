@@ -17,7 +17,7 @@ func TestRef(t *testing.T) {
 		{faces: []string{"a", "b", "c", "d", "e", "f", "g"}, want: []string{"a", "b", "c", "d", "e", "f"}},
 	}
 	for _, c := range cs {
-		got := dice.New(c.faces).Ref()
+		got := dice.New("name", c.faces).Ref()
 		if !reflect.DeepEqual(got, c.want) {
 			t.Errorf("len(dice.New(%v).Ref()) = %v; want %v", c.faces, got, c.want)
 		}
