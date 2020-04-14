@@ -18,7 +18,7 @@ FROM scratch
 
 WORKDIR /bin
 
-COPY --from=node-builder /build/build /usr/share/reactive-dice/assets
+COPY --from=node-builder /build/dist /usr/share/reactive-dice/assets
 COPY --from=golang-builder /etc/ssl/certs /etc/ssl/certs
 COPY --from=golang-builder /build/reactive-dice /bin/reactive-dice
 
