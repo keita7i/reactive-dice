@@ -14,3 +14,10 @@ services:
     command: [go, run, .]
     env_file:
     - dev.env
+  webpack:
+    image: node:12
+    container_name: webpack
+    volumes:
+    - ./react:/build
+    working_dir: /build
+    command: [npm, run, watch]
