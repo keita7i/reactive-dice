@@ -12,7 +12,10 @@ type DiceHandler struct {
 }
 
 func (h DiceHandler) Get(ctx *gin.Context) {
-	ctx.JSON(http.StatusOK, h.Dice.Ref())
+	ctx.JSON(http.StatusOK, DiceResponse{
+		Name:  h.Dice.Name(),
+		Faces: h.Dice.Ref(),
+	})
 }
 
 func (h DiceHandler) Post(ctx *gin.Context) {

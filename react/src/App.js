@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
 function App() {
+        let [name, setName] = useState('');
         let [face, setFace] = useState('');
 
         useEffect(() => {
-                refDice().then((faces) => {
-                        setFace(faces[0]);
+                refDice().then((dice) => {
+                        setName(dice.name);
+                        setFace(dice.faces[0]);
                 });
         }, []);
 
@@ -18,7 +20,7 @@ function App() {
         function rollDice() {
                 fetch('/v1/dice', { method: 'POST' }).then((res) => {
                         if (res.status === 204) {
-                                refDice().then((faces) => {
+                                refDice().then(({ faces }) => {
                                         let i = faces.length;
                                         let roller = setInterval(() => {
                                                 i--;
@@ -65,7 +67,7 @@ function App() {
                                         background: #69f;
                                 }
                         `}</style>
-                        <h1>Reactive Dice</h1>
+                        <h1>{name}</h1>
                         <p className="face">
                                 {face}
                         </p>
