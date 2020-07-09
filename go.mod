@@ -1,4 +1,4 @@
-module github.com/keitam913/reactive-dice
+module github.com/keita7i/reactive-dice
 
 go 1.14
 

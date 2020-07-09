@@ -2,9 +2,9 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/keitam913/reactive-dice/config"
-	"github.com/keitam913/reactive-dice/dice"
-	"github.com/keitam913/reactive-dice/rest"
+	"github.com/keita7i/reactive-dice/config"
+	"github.com/keita7i/reactive-dice/dice"
+	"github.com/keita7i/reactive-dice/rest"
 )
 
 type DI struct {

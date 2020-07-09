@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/keitam913/reactive-dice/dice"
+	"github.com/keita7i/reactive-dice/dice"
 )
 
 func TestRef(t *testing.T) {

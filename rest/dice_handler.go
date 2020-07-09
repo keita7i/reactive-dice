@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/keitam913/reactive-dice/dice"
+	"github.com/keita7i/reactive-dice/dice"
 )
 
 type DiceHandler struct {
